@@ -14,7 +14,7 @@ git
 
 MySQL 데이터베이스 생성 및 사용자 생성
 
-create user 'cafeuser'@'%' identified by 'bitc5600';
+create user 'cafeuser'@'%' identified by 'eoghks5953';
 GRANT ALL PRIVILEGES ON *.* TO 'cafeuser'@'%';
 create database cafe;
 
@@ -32,22 +32,13 @@ CREATE TABLE user(
     createDate timestamp
 ) engine=InnoDB default charset=utf8;
 
-CREATE TABLE board(
+CREATE TABLE orders(
     id int primary key auto_increment,
     userId int,
-    title varchar(100) not null,
-    content longtext,
-    readCount int default 0,
-    createDate timestamp,
+    productName varchar(30) not null,
+    prdocutCount int not null,
+    productPrice int not null,
+    totalPrice int not null,
+    orderDate timestamp,
     foreign key (userId) references user (id)
-) engine=InnoDB default charset=utf8;
-
-CREATE TABLE reply(
-    id int primary key auto_increment,
-    userId int,
-    boardId int,
-    content varchar(300) not null,
-    createDate timestamp,
-    foreign key (userId) references user (id) on delete set null,
-    foreign key (boardId) references board (id) on delete cascade
 ) engine=InnoDB default charset=utf8;
